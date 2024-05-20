@@ -22,7 +22,7 @@ function HomePage() {
     }
   }
   return (
-    <div className="container-fluid ">
+    <div className="container-fluid text-center">
       <Toaster position="top-center"></Toaster>
       <div className="row justify-content-center align-items-center min-vh-100">
         <div className="col-12 col-md-6">
@@ -71,6 +71,7 @@ function HomePage() {
               </p>
             </div>
           </div>
+      <div className="text-white text-xl">Made by <a className="text-pink-600 hover:text-green-500" href="https://github.com/rajan-2003">Rajan</a></div>
         </div>
       </div>
     </div>

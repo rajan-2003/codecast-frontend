@@ -194,6 +194,7 @@ export default function CodeEditor({ socketRef, onCodeChange, onLangChange,onInp
         <div style={{ width: "50%", heigth: "100%" }}>
           <div className=" text-white ml-1">input</div>
           <textarea
+          placeholder="Enter input here"
             className="text-slate-100 text-xs overflow-auto ml-1 p-2 "
             style={{
               width: "100%",
