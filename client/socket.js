@@ -7,5 +7,5 @@ export const initSocket=async()=>{
         timeout:10000,
         transports:['websocket'],
     };
-    return io("https://codecast-backend.onrender.com/",options);
+    return io("https://codecast-backend-1.onrender.com",options);
 }
