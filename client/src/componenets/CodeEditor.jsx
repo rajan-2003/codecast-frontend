@@ -33,6 +33,10 @@ export default function CodeEditor({ socketRef, onCodeChange, onLangChange,onInp
       socketRef.current.on("output-change", ({ out }) => {
         setOutput(out);
       });
+
+      socketRef.current.on("processing",({proc})=>{
+        setProcessing(proc)
+      })
     }
 
     return () => {
@@ -41,6 +45,7 @@ export default function CodeEditor({ socketRef, onCodeChange, onLangChange,onInp
         socketRef.current.off("lang");
         socketRef.current.off("input-change");
         socketRef.current.off("output-change");
+        socketRef.current.off("processing");
       }
     };
   }, [socketRef.current]);
@@ -63,10 +68,14 @@ export default function CodeEditor({ socketRef, onCodeChange, onLangChange,onInp
     setInput(e.target.value);
     socketRef.current.emit("input-change",{roomId,inp:e.target.value});
   }
-
-  async function compile() {
+  if(processing===true){
     toast.success("compiling");
+    
+  }
+  async function compile() {
+    // toast.success("compiling");
     setProcessing(true);
+    socketRef.current.emit("processing",{roomId,proc:true});
     const options = {
       method: "POST",
       url: import.meta.env.VITE_URL,
@@ -99,6 +108,7 @@ export default function CodeEditor({ socketRef, onCodeChange, onLangChange,onInp
       }
       console.log(err);
       setProcessing(false);
+      socketRef.current.emit("processing",{roomId,proc:false});
     }
   }
 
@@ -126,6 +136,7 @@ export default function CodeEditor({ socketRef, onCodeChange, onLangChange,onInp
       } else {
         console.log("response.data", response.data);
         setProcessing(false);
+        socketRef.current.emit("processing",{roomId,proc:false});
         onOutputChange(response.data);
         setOutput(response.data);
         socketRef.current.emit("output-change",{roomId,out:response.data});
@@ -136,6 +147,7 @@ export default function CodeEditor({ socketRef, onCodeChange, onLangChange,onInp
       console.log("err", err);
       toast.error("some error while getting code from api");
       setProcessing(false);
+      socketRef.current.emit("processing",{roomId,proc:false});
     }
   }
 
