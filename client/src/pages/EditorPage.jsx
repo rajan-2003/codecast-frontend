@@ -29,8 +29,8 @@ function EditorPage() {
 
       function handleErrors(e) {
         console.log("socket error", e);
-        toast.error("Socket connection failed, try again later");
         navigate("/");
+        toast.error("Socket connection failed, try again later");
       }
 
       socketRef.current.emit("join", { roomId, username });
