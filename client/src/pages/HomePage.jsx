@@ -17,7 +17,7 @@ function HomePage() {
     if (roomId.trim() === "" || username.trim() === "")
       toast.error("require both username and roomId");
     else {
-      alert("please wait it might take some time to load")
+      // alert("please wait it might take some time to load")
       navigate(`/editor/${username.trim()}/${roomId.trim()}`)
     }
   }
