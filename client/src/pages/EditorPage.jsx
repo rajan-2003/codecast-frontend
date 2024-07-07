@@ -30,7 +30,7 @@ function EditorPage() {
       function handleErrors(e) {
         console.log("socket error", e);
         navigate("/");
-        alert("Socket connection failed, try again later after 1 min");
+        alert("Socket connection failed because, it is deployed on free version of render.it takes 1 min to start the server, try again after 1 min");
       }
 
       socketRef.current.emit("join", { roomId, username });
